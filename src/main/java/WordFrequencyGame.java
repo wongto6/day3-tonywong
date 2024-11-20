@@ -7,6 +7,7 @@ public class WordFrequencyGame {
     public static final String SPACE = "\\s+";
     public static final String LINE_BREAK = "\n";
     public static final String CALCULATE_ERROR = "Calculate Error";
+    public static final int INITIAL_COUNT = 1;
 
     public String getWordFrequency(String sentences) {
         try {
@@ -24,7 +25,7 @@ public class WordFrequencyGame {
     private List<WordFrequency> mapSentenceToWordFrequencies(String sentences) {
         return Arrays
                 .stream(sentences.split(SPACE))
-                .map(word -> new WordFrequency(word, 1))
+                .map(word -> new WordFrequency(word, INITIAL_COUNT))
                 .collect(Collectors.toList());
     }
 
