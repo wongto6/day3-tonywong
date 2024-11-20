@@ -13,7 +13,7 @@ public class WordFrequencyGame {
             //split the WordCount string with 1 to n pieces of spaces
             List<WordFrequency> wordFrequencies = mapSentenceToWordFrequencies(sentences);
             //get the map for the next step of sizing the same word
-            Map<String, List<WordFrequency>> wordToWordFrequencies = getListMap(wordFrequencies);
+            Map<String, List<WordFrequency>> wordToWordFrequencies = getWordToWordFrequencies(wordFrequencies);
             List<WordFrequency> wordFrequenciesAggregated = aggregateWordFrequencies(wordToWordFrequencies);
             return mapWordFrequenciesToString(wordFrequenciesAggregated);
         } catch (Exception e) {
@@ -33,7 +33,7 @@ public class WordFrequencyGame {
                 .entrySet()
                 .stream()
                 .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
-                .sorted(Comparator.comparing(WordFrequency::getWord))
+                .sorted(Comparator.comparing(WordFrequency::getWordCount).reversed())
                 .collect(Collectors.toList());
     }
 
@@ -44,7 +44,7 @@ public class WordFrequencyGame {
                 .collect(Collectors.joining(LINE_BREAK));
     }
 
-    private Map<String, List<WordFrequency>> getListMap(List<WordFrequency> wordFrequencyList) {
+    private Map<String, List<WordFrequency>> getWordToWordFrequencies(List<WordFrequency> wordFrequencyList) {
         return wordFrequencyList.stream().collect(Collectors.groupingBy(WordFrequency::getWord));
     }
 
