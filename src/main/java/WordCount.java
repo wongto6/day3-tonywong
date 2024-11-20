@@ -7,7 +7,6 @@ public class WordCount {
         this.count = count;
     }
 
-
     public String getWord() {
         return this.word;
     }
@@ -15,6 +14,5 @@ public class WordCount {
     public int getWordCount() {
         return this.count;
     }
-
 
 }
