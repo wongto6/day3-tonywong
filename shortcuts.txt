@@ -1,0 +1,14 @@
+ctrl alt L - format
+ctrl alt <- - previous
+ctrl alt -> later
+shift shift -> global search
+shift f6 -> change all in file
+ctrl alt c -> create constant variable
+alt f7 -> find usages
+ctrl alt shift t -> refactor this
+ctrl x -> cut
+ctrl c -> copy
+ctrl v -> paste
+ctrl z -> undo
+ctrl c (in console) -> terminate
+
