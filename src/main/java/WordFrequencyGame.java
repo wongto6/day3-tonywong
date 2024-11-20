@@ -6,13 +6,13 @@ import java.util.StringJoiner;
 
 
 public class WordFrequencyGame {
-    public String getResult(String WordCountStr) {
+    public String getWordFrequency(String sentences) {
         try {
             //split the WordCount string with 1 to n pieces of spaces
-            String[] arr = WordCountStr.split("\\s+");
+            String[] words = sentences.split("\\s+");
             List<WordCount> WordCountList = new ArrayList<>();
-            for (String s : arr) {
-                WordCount WordCount = new WordCount(s, 1);
+            for (String word : words) {
+                WordCount WordCount = new WordCount(word, 1);
                 WordCountList.add(WordCount);
             }
             //get the map for the next step of sizing the same word
@@ -26,8 +26,8 @@ public class WordFrequencyGame {
             WordCountList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
             StringJoiner joiner = new StringJoiner("\n");
             for (WordCount w : WordCountList) {
-                String s = w.getWord() + " " + w.getWordCount();
-                joiner.add(s);
+                String word = w.getWord() + " " + w.getWordCount();
+                joiner.add(word);
             }
             return joiner.toString();
         } catch (Exception e) {
