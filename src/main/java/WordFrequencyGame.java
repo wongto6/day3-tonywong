@@ -11,9 +11,7 @@ public class WordFrequencyGame {
 
     public String getWordFrequency(String sentences) {
         try {
-            //split the WordCount string with 1 to n pieces of spaces
             List<WordFrequency> wordFrequencies = mapSentenceToWordFrequencies(sentences);
-            //get the map for the next step of sizing the same word
             Map<String, List<WordFrequency>> wordToWordFrequencies = getWordToWordFrequencies(wordFrequencies);
             List<WordFrequency> wordFrequenciesAggregated = aggregateWordFrequencies(wordToWordFrequencies);
             return mapWordFrequenciesToString(wordFrequenciesAggregated);
