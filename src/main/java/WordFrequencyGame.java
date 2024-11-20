@@ -10,22 +10,22 @@ public class WordFrequencyGame {
         try {
             //split the WordCount string with 1 to n pieces of spaces
             String[] words = sentences.split("\\s+");
-            List<WordFrequency> wordFrequencyList = new ArrayList<>();
+            List<WordFrequency> wordFrequencies = new ArrayList<>();
             for (String word : words) {
                 WordFrequency wordFrequency = new WordFrequency(word, 1);
-                wordFrequencyList.add(wordFrequency);
+                wordFrequencies.add(wordFrequency);
             }
             //get the map for the next step of sizing the same word
-            Map<String, List<WordFrequency>> map = getListMap(wordFrequencyList);
+            Map<String, List<WordFrequency>> map = getListMap(wordFrequencies);
             List<WordFrequency> list = new ArrayList<>();
             for (Map.Entry<String, List<WordFrequency>> entry : map.entrySet()) {
                 WordFrequency WordFrequency = new WordFrequency(entry.getKey(), entry.getValue().size());
                 list.add(WordFrequency);
             }
-            wordFrequencyList = list;
-            wordFrequencyList.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
+            wordFrequencies = list;
+            wordFrequencies.sort((w1, w2) -> w2.getWordCount() - w1.getWordCount());
             StringJoiner joiner = new StringJoiner("\n");
-            for (WordFrequency w : wordFrequencyList) {
+            for (WordFrequency w : wordFrequencies) {
                 String word = w.getWord() + " " + w.getWordCount();
                 joiner.add(word);
             }
