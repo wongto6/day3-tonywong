@@ -6,7 +6,7 @@ public class WordFrequencyGame {
 
     public static final String SPACE = "\\s+";
     public static final String LINE_BREAK = "\n";
-    public static final String CALCULATE_ERROR = "Calculate Error";
+    public static final String PARSE_ERROR = "Error occurred when parsing the sentences, please check input.";
     public static final int INITIAL_COUNT = 1;
 
     public String getWordFrequency(String sentences) {
@@ -16,7 +16,7 @@ public class WordFrequencyGame {
             List<WordFrequency> wordFrequenciesAggregated = aggregateWordFrequencies(wordToWordFrequencies);
             return mapWordFrequenciesToString(wordFrequenciesAggregated);
         } catch (Exception e) {
-            return CALCULATE_ERROR;
+            return PARSE_ERROR;
         }
     }
 
