@@ -1,8 +1,5 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 public class WordFrequencyGame {
@@ -14,27 +11,21 @@ public class WordFrequencyGame {
     public String getWordFrequency(String sentences) {
         try {
             //split the WordCount string with 1 to n pieces of spaces
-            String[] words = sentences.split(SPACE);
-            List<WordFrequency> wordFrequencies = new ArrayList<>();
-            for (String word : words) {
-                WordFrequency wordFrequency = new WordFrequency(word, 1);
-                wordFrequencies.add(wordFrequency);
-            }
+            List<WordFrequency> wordFrequencies = Arrays
+                    .stream(sentences.split(SPACE))
+                    .map(word -> new WordFrequency(word, 1))
+                    .collect(Collectors.toList());
             //get the map for the next step of sizing the same word
             Map<String, List<WordFrequency>> wordToWordFrequencies = getListMap(wordFrequencies);
-            List<WordFrequency> wordFrequenciesAgg = new ArrayList<>();
-            for (Map.Entry<String, List<WordFrequency>> entry : wordToWordFrequencies.entrySet()) {
-                WordFrequency WordFrequency = new WordFrequency(entry.getKey(), entry.getValue().size());
-                wordFrequenciesAgg.add(WordFrequency);
-            }
-            wordFrequencies = wordFrequenciesAgg;
+
+            wordFrequencies = wordToWordFrequencies
+                    .entrySet()
+                    .stream()
+                    .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
+                    .collect(Collectors.toList());
             wordFrequencies.sort((word, nextWord) -> nextWord.getWordCount() - word.getWordCount());
-            StringJoiner WordFrequencyJoiner = new StringJoiner(LINE_BREAK);
-            for (WordFrequency wordFrequency : wordFrequencies) {
-                String word = wordFrequency.getWord() + " " + wordFrequency.getWordCount();
-                WordFrequencyJoiner.add(word);
-            }
-            return WordFrequencyJoiner.toString();
+
+            return  wordFrequencies.stream().map(wordFrequency -> wordFrequency.getWord() + " " + wordFrequency.getWordCount()).collect(Collectors.joining(LINE_BREAK));
         } catch (Exception e) {
             return CALCULATE_ERROR;
         }
@@ -42,6 +33,7 @@ public class WordFrequencyGame {
 
     private Map<String, List<WordFrequency>> getListMap(List<WordFrequency> wordFrequencyList) {
         Map<String, List<WordFrequency>> WordFrequencyMap = new HashMap<>();
+
         for (WordFrequency WordFrequency : wordFrequencyList) {
 //       map.computeIfAbsent(WordCount.getValue(), k -> new ArrayList<>()).add(WordCount);
             if (!WordFrequencyMap.containsKey(WordFrequency.getWord())) {
