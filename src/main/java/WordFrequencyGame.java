@@ -24,7 +24,7 @@ public class WordFrequencyGame {
         return Arrays
                 .stream(sentences.split(SPACE))
                 .map(word -> new WordFrequency(word, INITIAL_COUNT))
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private List<WordFrequency> aggregateWordFrequencies(Map<String, List<WordFrequency>> wordToWordFrequencies) {
@@ -33,7 +33,7 @@ public class WordFrequencyGame {
                 .stream()
                 .map(entry -> new WordFrequency(entry.getKey(), entry.getValue().size()))
                 .sorted(Comparator.comparing(WordFrequency::getWordCount).reversed())
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private String mapWordFrequenciesToString(List<WordFrequency> wordFrequencies) {
